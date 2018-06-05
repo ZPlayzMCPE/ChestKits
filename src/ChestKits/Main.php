@@ -8,6 +8,8 @@ use pocketmine\block\Block;
 
 use pocketmine\command\{Command, CommandSender};
 
+use pocketmine\item\enchantment\{Enchantment, EnchantmentInstance};
+
 use pocketmine\inventory\ChestInventory;
 
 use pocketmine\item\{Item, ItemFactory};
@@ -35,17 +37,25 @@ class Main extends PluginBase {
             return true;
         }
         switch($command){
-            case "kit":
-                $helmet = Item::get(306, 0, 1);
-                $helmet->setCustomName("Kit Helmet");
-                $chestplate = Item::get(307, 0, 1);
-                $chestplate->setCustomName("Kit Chestplate");
-                $leggings = Item::get(308, 0, 1);
-                $leggings->setCustomName("Kit Leggings");
-                $boots = Item::get(309, 0, 1);
-                $boots->setCustomName("Kit Boots");
-                $sword = Item::get(267, 0, 1);
-                $sword->setCustomName("Kit Sword");
+            case "reset":
+                $helmet = Item::get(298, 0, 1);
+                $helmet->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $helmet->setCustomName("§eStarter Helmet");
+                $chestplate = Item::get(299, 0, 1);
+                $chestplate->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $chestplate->setCustomName("§eStarter ChestPlate");
+                $leggings = Item::get(300, 0, 1);
+                $leggings->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $leggings->setCustomName("§eStarter Leggings");
+                $boots = Item::get(301, 0, 1);
+                $boots->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $boots->setCustomName("§eStarter Boots");
+                $sword = Item::get(272, 0, 1);
+                $sword->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::SHARPNESS)));
+                $sword->setCustomName("§eStarter Sword");
+                $pickaxe = Item::get(274, 0, 1);
+                $pickaxe->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::EFFICIENCY)));
+                $pickaxe->setCustomName("§eStarter Pickaxe");
                 $nbt = new CompoundTag("BlockEntityTag", [new ListTag("Items", [$helmet->nbtSerialize(0), $chestplate->nbtSerialize(1), $leggings->nbtSerialize(2), $boots->nbtSerialize(3), $sword->nbtSerialize(4)])]);
                 $chest = ItemFactory::get(Block::CHEST, 0, 1);
                 $chest->setNamedTagEntry($nbt);
