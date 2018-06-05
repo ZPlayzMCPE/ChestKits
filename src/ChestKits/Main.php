@@ -37,7 +37,7 @@ class Main extends PluginBase {
             return true;
         }
         switch($command){
-            case "reset":
+            case "starter":
                 $helmet = Item::get(298, 0, 1);
                 $helmet->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
                 $helmet->setCustomName("§eStarter Helmet");
@@ -56,10 +56,42 @@ class Main extends PluginBase {
                 $pickaxe = Item::get(274, 0, 1);
                 $pickaxe->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::EFFICIENCY)));
                 $pickaxe->setCustomName("§eStarter Pickaxe");
-                $nbt = new CompoundTag("BlockEntityTag", [new ListTag("Items", [$helmet->nbtSerialize(0), $chestplate->nbtSerialize(1), $leggings->nbtSerialize(2), $boots->nbtSerialize(3), $sword->nbtSerialize(4)])]);
-                $chest = ItemFactory::get(Block::CHEST, 0, 1);
+                $shovel = Item::get(273, 0, 1);
+                $shovel->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::EFFICIENCY)));
+                $shovel->setCustomName("§eStarter Shovel");
+                $Axe = Item::get(275, 0, 1);
+                $axe->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::EFFICIENCY)));
+                $axe->setCustomName("§eStarter Axe");
+                $nbt = new CompoundTag("BlockEntityTag", [new ListTag("Items", [$helmet->nbtSerialize(0), $chestplate->nbtSerialize(1), $leggings->nbtSerialize(2), $boots->nbtSerialize(3), $sword->nbtSerialize(4), $pickaxe->nbtSerialize(5), $shovel->nbtSerialize(6), $axe->nbtSerialize(7)])]);
+                $chest = ItemFactory::get(Block::CHEST, 1, 1);
                 $chest->setNamedTagEntry($nbt);
-                $chest->setCustomName("Kit");
+                $chest->setCustomName("§a§lStarter kit! §bTap me!");
+                $sender->getInventory()->addItem($chest);
+                break;
+        }
+        case "weekly":
+                $helmet = Item::get(, 0, 1);
+                $helmet->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $helmet->setCustomName("§eStarter Helmet");
+                $chestplate = Item::get(299, 0, 1);
+                $chestplate->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $chestplate->setCustomName("§eStarter ChestPlate");
+                $leggings = Item::get(300, 0, 1);
+                $leggings->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $leggings->setCustomName("§eStarter Leggings");
+                $boots = Item::get(301, 0, 1);
+                $boots->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::PROTECTION)));
+                $boots->setCustomName("§eStarter Boots");
+                $sword = Item::get(272, 0, 1);
+                $sword->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::SHARPNESS)));
+                $sword->setCustomName("§eStarter Sword");
+                $pickaxe = Item::get(274, 0, 1);
+                $pickaxe->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(Enchantment::EFFICIENCY)));
+                $pickaxe->setCustomName("§eStarter Pickaxe");
+                $nbt = new CompoundTag("BlockEntityTag", [new ListTag("Items", [$helmet->nbtSerialize(0), $chestplate->nbtSerialize(1), $leggings->nbtSerialize(2), $boots->nbtSerialize(3), $sword->nbtSerialize(4)])]);
+                $chest = ItemFactory::get(Block::CHEST, 2, 1);
+                $chest->setNamedTagEntry($nbt);
+                $chest->setCustomName("§a§lStarter kit! §bTap me!");
                 $sender->getInventory()->addItem($chest);
                 break;
         }
